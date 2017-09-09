@@ -1,0 +1,14 @@
+{
+  "RootNamespace":"",
+  "Packages": [
+    "Fuse",
+    "FuseJS",
+    "Android.ActivityUtils"
+  ],
+  "Includes": [
+    "*",
+     "SignatureView.h:CHeader",
+     "SignatureView.mm:ObjCSource:iOS"
+  ]
+}
+

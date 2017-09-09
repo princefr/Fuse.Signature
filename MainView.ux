@@ -1,0 +1,21 @@
+<App>
+	<ClientPanel>
+		<Grid Rows="8*,1*">
+			<NativeViewHost>
+				<Native.Signature ux:Name="datepicker"/>
+			</NativeViewHost>
+
+			<JavaScript>
+				exports.click = function(){
+					datepicker.ClearSignature()
+
+				}
+
+
+			</JavaScript>
+			
+			<Button Text="Butttonnnn" Clicked="{click}"/>
+		</Grid>
+	</ClientPanel>
+</App>
+
