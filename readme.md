@@ -49,7 +49,7 @@ For accessing Signature panel functions you will need to give a `ux:Name` to `Na
 # Clear Signature Panel
 
 for clearing the signature pad, you will need to call your `ux:Name` with the Statement `ClearSignature()`. only work on android.
-for ios you will simply need to longPress on the screen.
+for `iOS` you will simply need to longPress on the screen to erase the last signature.
 
 ```
 <App>
