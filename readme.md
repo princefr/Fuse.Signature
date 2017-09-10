@@ -7,7 +7,7 @@ iOS and Android
 
 
 
-# Displaying the signature paenl.
+# Displaying the signature panel.
 
 ```
 			<NativeViewHost>
