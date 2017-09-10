@@ -28,10 +28,10 @@ namespace Native.iOS
 		}
 
 
-		  void ISignature.RetrievePicture(string fileName)
+		  void ISignature.Save(string fileName)
 		{
 			debug_log "i have been pahhhhh";
-			RetrievePicture(Handle, fileName);
+			Save(Handle, fileName);
 		}
 
 
@@ -49,7 +49,7 @@ namespace Native.iOS
 
 
         [Foreign(Language.ObjC)]
-         void RetrievePicture(ObjC.Object handle, string fileName)
+         void Save(ObjC.Object handle, string fileName)
         @{
 
         	SignatureView* dp = (SignatureView*)handle;

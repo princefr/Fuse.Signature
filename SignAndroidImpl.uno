@@ -29,9 +29,9 @@ namespace Native.Android
 		}
 
 
-		  void ISignature.RetrievePicture(string fileName)
+		  void ISignature.Save(string fileName)
 		{
-			RetrievePicture(Handle, fileName);
+			Save(Handle, fileName);
 			debug_log "bresson";
 		}
 
@@ -48,7 +48,7 @@ namespace Native.Android
 
 
         [Foreign(Language.Java)]
-        void RetrievePicture(this Java.Object handle, string fileName)
+        void Save(this Java.Object handle, string fileName)
         @{
 
         	SignaturePad signaturePad = (SignaturePad)handle;

@@ -16,12 +16,12 @@ namespace Native
 		static Signature()
 		{
 					ScriptClass.Register(typeof(Signature),
-				new ScriptMethod<Signature>("RetrievePicture", RetrievePicture, ExecutionThread.MainThread),
+				new ScriptMethod<Signature>("Save", Save, ExecutionThread.MainThread),
 				new ScriptMethod<Signature>("ClearSignature", ClearSignature, ExecutionThread.MainThread));
 		}
 
 
-			static void RetrievePicture(Context c, Signature signature, object[] args)
+			static void Save(Context c, Signature signature, object[] args)
 		{
 			var dpv = signature.SignatureView;
 			var filename = (string)args[0];
@@ -31,7 +31,7 @@ namespace Native
 				return;
 			}else{
 				if(dpv != null){
-				dpv.RetrievePicture(filename);
+				dpv.Save(filename);
 				}
 			}
 

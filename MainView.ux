@@ -7,16 +7,13 @@
 
 			<JavaScript>
 			var Observable = require("FuseJS/Observable")
-			var FileSystem = require("FuseJS/FileSystem");
-			exports.data = Observable()
 
-			exports.listFile = function(){
-				FileSystem.listFiles(FileSystem.dataDirectory).then(function(results){
-					console.log(JSON.stringify(results))
-				})
+
+			exports.Erase = function(){
+					SignMeIn.ClearSignature();
 			}
 				exports.click = function(){
-					SignMeIn.RetrievePicture("RetrievePicture.png");
+					SignMeIn.Save("youhou.png");
 
 				}
 
@@ -26,7 +23,7 @@
 			<Image File="{data}"/>
 			
 			<Grid Columns="1*,1*">
-				<Button Text="ListFile" Clicked="{listFile}"/>
+				<Button Text="Erase" Clicked="{Erase}"/>
 				<Button Text="Save" Clicked="{click}"/>
 			</Grid>
 		</Grid>
