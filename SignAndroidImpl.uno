@@ -11,7 +11,7 @@ namespace Native.Android
 
 	[Require("Gradle.Dependency.Compile", "com.github.gcacace:signature-pad:1.2.1")]
 	[ForeignInclude(Language.Java, "com.github.gcacace.signaturepad.views.SignaturePad", "com.github.gcacace.signaturepad.utils.SvgBuilder")]
-	[ForeignInclude(Language.Java, "com.fuse.Activity", "android.util.Log", "android.graphics.Bitmap")]
+	[ForeignInclude(Language.Java, "com.fuse.Activity", "android.util.Log", "android.graphics.Bitmap", "java.io.FileOutputStream", "android.graphics.Bitmap.CompressFormat")]
     extern(Android) class Signature : LeafView, ISignature
     {
 
@@ -29,10 +29,10 @@ namespace Native.Android
 		}
 
 
-		  void ISignature.RetrievePicture()
+		  void ISignature.RetrievePicture(string fileName)
 		{
-			debug_log Handle;
-			RetrievePicture(Handle);
+			RetrievePicture(Handle, fileName);
+			debug_log "bresson";
 		}
 
 
@@ -48,12 +48,18 @@ namespace Native.Android
 
 
         [Foreign(Language.Java)]
-        void RetrievePicture(Java.Object handle)
+        void RetrievePicture(this Java.Object handle, string fileName)
         @{
-        	android.util.Log.d("myexception", "truuuuuuuuu");
-        	try{
-        	Bitmap signatureBitmap = ((SignaturePad)handle).getSignatureBitmap();
 
+        	SignaturePad signaturePad = (SignaturePad)handle;
+        	try{
+        	Bitmap signatureBitmap = signaturePad.getSignatureBitmap();
+        	String path = Activity.getRootActivity().getFilesDir().getAbsolutePath() + "/" + fileName;
+        	FileOutputStream os;
+        	os = new FileOutputStream(path, false);
+	    	signatureBitmap.compress(CompressFormat.PNG, 80, os);
+			os.flush();
+			os.close();
         	}catch(Exception e){
         		android.util.Log.e("myexception", e.toString());
         	}
@@ -61,12 +67,19 @@ namespace Native.Android
 
 
 
+
+
         [Foreign(Language.Java)]
         void ClearSignature(Java.Object handle)
         @{
-        	((SignaturePad)handle).clear();
+
+        	SignaturePad msignaturePad = (SignaturePad)handle;
+        	msignaturePad.clear();
             
         @}
+
+
+
 
     }
 

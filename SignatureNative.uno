@@ -18,7 +18,7 @@ namespace Native
        internal interface ISignature
     {
 		void ClearSignature();
-		void RetrievePicture();
+		void RetrievePicture(string fileName);
         
     }
 

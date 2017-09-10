@@ -17,17 +17,23 @@ namespace Native
 		{
 					ScriptClass.Register(typeof(Signature),
 				new ScriptMethod<Signature>("RetrievePicture", RetrievePicture, ExecutionThread.MainThread),
-				new ScriptMethod<Signature>("ClearSignature", RetrievePicture, ExecutionThread.MainThread));
+				new ScriptMethod<Signature>("ClearSignature", ClearSignature, ExecutionThread.MainThread));
 		}
 
 
 			static void RetrievePicture(Context c, Signature signature, object[] args)
 		{
 			var dpv = signature.SignatureView;
-			if(dpv != null){
-				dpv.RetrievePicture();
+			var filename = (string)args[0];
+			if (args.Length != 1)
+			{
+				Fuse.Diagnostics.UserError( "retrieve requires 1 argument, the value of the item", signature);
+				return;
+			}else{
+				if(dpv != null){
+				dpv.RetrievePicture(filename);
+				}
 			}
-			debug_log "hhababba";
 
 		}
 
@@ -39,7 +45,6 @@ namespace Native
 				dpv.ClearSignature();
 			}
 
-			debug_log "hhababba";
 
 		}
 	}

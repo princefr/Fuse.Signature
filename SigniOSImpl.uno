@@ -3,6 +3,7 @@ namespace Native.iOS
 	using Uno;
     using Uno.UX;
     using Uno.Compiler.ExportTargetInterop;
+    using Fuse.Scripting;
 
     using Fuse.Controls.Native.iOS;
 
@@ -22,15 +23,15 @@ namespace Native.iOS
 
           void ISignature.ClearSignature()
 		{
-			debug_log Handle;
+
 			ClearSignature(Handle);
 		}
 
 
-		  void ISignature.RetrievePicture()
+		  void ISignature.RetrievePicture(string fileName)
 		{
 			debug_log "i have been pahhhhh";
-			RetrievePicture(Handle);
+			RetrievePicture(Handle, fileName);
 		}
 
 
@@ -48,13 +49,17 @@ namespace Native.iOS
 
 
         [Foreign(Language.ObjC)]
-         void RetrievePicture(ObjC.Object handle)
+         void RetrievePicture(ObjC.Object handle, string fileName)
         @{
 
         	SignatureView* dp = (SignatureView*)handle;
 			NSData *signatureData = [dp signatureData];
-			NSString *base64String = [signatureData base64EncodedStringWithOptions:0];
-			return base64String;
+            NSString *documentsDirectory = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
+            NSString *path = [documentsDirectory stringByAppendingPathComponent:fileName];
+            [signatureData writeToFile:path atomically:YES];
+            NSLog(@"%@", path);
+
+			//return base64String;
         @}
 
 
